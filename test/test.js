@@ -1,4 +1,4 @@
-const { FrameClient } = require('../src/index');
+const { SolisClient } = require('../src/index');
 
-const cli = new FrameClient();
+const cli = new SolisClient();
 console.log(cli);

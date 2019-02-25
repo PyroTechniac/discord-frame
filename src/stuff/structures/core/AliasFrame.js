@@ -14,4 +14,13 @@ class AliasFrame extends Frame {
          */
         this.aliases = options.aliases;
     }
+
+
+    toJSON() {
+        const obj = super.toJSON();
+        obj.aliases = this.aliases.slice(0);
+        return obj;
+    }
 }
+
+module.exports = AliasFrame;

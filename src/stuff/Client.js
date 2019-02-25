@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { Permissions, Permissions: { FLAGS } } = Discord;
+const path = require('path');
 
 /**
  * The base Client of Solis
@@ -14,6 +15,12 @@ class SolisClient extends Discord.Client {
          * @type {Permissions}
          */
         this.basePermissions = new Permissions(3072);
+
+        /**
+         * The user directory
+         * @type {string}
+         */
+        this.userBaseDirectory = path.dirname(require.main.filename);
 
         /**
          * The apps info from the discord api

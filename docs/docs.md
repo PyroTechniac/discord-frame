@@ -7,8 +7,8 @@
 <dt><a href="#AliasFrame">AliasFrame</a> ⇐ <code><a href="#Frame">Frame</a></code></dt>
 <dd><p>The common class for any Frame with an alias</p>
 </dd>
-<dt><a href="#Cache">Cache</a> ⇐ <code><a href="https://discord.js.org/#/docs/main/master/class/Collection">Collection</a></code></dt>
-<dd><p>The common base for all Caches</p>
+<dt><a href="#Box">Box</a> ⇐ <code><a href="https://discord.js.org/#/docs/main/master/class/Collection">Collection</a></code></dt>
+<dd><p>The common base for all Boxes</p>
 </dd>
 <dt><a href="#Frame">Frame</a></dt>
 <dd><p>The base class for everything in Solis</p>
@@ -35,6 +35,7 @@ The base Client of Solis
 
 * [SolisClient](#SolisClient) ⇐ [<code>Client</code>](https://discord.js.org/#/docs/main/master/class/Client)
     * [.basePermissions](#SolisClient+basePermissions) : <code>Permissions</code>
+    * [.userBaseDirectory](#SolisClient+userBaseDirectory) : <code>string</code>
     * [.application](#SolisClient+application) : <code>external:ClientApplication</code>
     * [.fetchApplication()](#SolisClient+fetchApplication) ⇒ <code>external:ClientApplication</code>
 
@@ -42,6 +43,12 @@ The base Client of Solis
 
 ### solisClient.basePermissions : <code>Permissions</code>
 The base permissions that the [Client#invite](Client#invite) asks for, defaults to [VIEW_CHANNELS, SEND_MESSAGES]
+
+**Kind**: instance property of [<code>SolisClient</code>](#SolisClient)  
+<a name="SolisClient+userBaseDirectory"></a>
+
+### solisClient.userBaseDirectory : <code>string</code>
+The user directory
 
 **Kind**: instance property of [<code>SolisClient</code>](#SolisClient)  
 <a name="SolisClient+application"></a>
@@ -70,9 +77,13 @@ The common class for any Frame with an alias
     * [.file](#Frame+file) : <code>Array.&lt;string&gt;</code>
     * [.name](#Frame+name) : <code>string</code>
     * [.enabled](#Frame+enabled) : <code>Boolean</code>
-    * [.cache](#Frame+cache) : [<code>Cache</code>](#Cache)
+    * [.box](#Frame+box) : [<code>Box</code>](#Box)
     * [.directory](#Frame+directory) : <code>string</code>
     * [.type](#Frame+type) : <code>string</code>
+    * [.path](#Frame+path)
+    * [.reload()](#Frame+reload) ⇒ [<code>Frame</code>](#Frame)
+    * [.unload()](#Frame+unload) ⇒ <code>void</code>
+    * [.disable()](#Frame+disable) ⇒ [<code>Frame</code>](#Frame)
 
 <a name="AliasFrame+aliases"></a>
 
@@ -104,10 +115,10 @@ The name of the Frame
 Whether this Frame is enabled
 
 **Kind**: instance property of [<code>AliasFrame</code>](#AliasFrame)  
-<a name="Frame+cache"></a>
+<a name="Frame+box"></a>
 
-### aliasFrame.cache : [<code>Cache</code>](#Cache)
-The Cache for this Frame
+### aliasFrame.box : [<code>Box</code>](#Box)
+The box for this Frame
 
 **Kind**: instance property of [<code>AliasFrame</code>](#AliasFrame)  
 <a name="Frame+directory"></a>
@@ -123,68 +134,160 @@ The type of Frame
 
 **Kind**: instance property of [<code>AliasFrame</code>](#AliasFrame)  
 **Read only**: true  
-<a name="Cache"></a>
+<a name="Frame+path"></a>
 
-## Cache ⇐ [<code>Collection</code>](https://discord.js.org/#/docs/main/master/class/Collection)
-The common base for all Caches
+### aliasFrame.path
+The absolute path to the frame
+
+**Kind**: instance property of [<code>AliasFrame</code>](#AliasFrame)  
+<a name="Frame+reload"></a>
+
+### aliasFrame.reload() ⇒ [<code>Frame</code>](#Frame)
+Reloads the Frame
+
+**Kind**: instance method of [<code>AliasFrame</code>](#AliasFrame)  
+**Returns**: [<code>Frame</code>](#Frame) - The newly loaded Frame  
+<a name="Frame+unload"></a>
+
+### aliasFrame.unload() ⇒ <code>void</code>
+Unloads the frame
+
+**Kind**: instance method of [<code>AliasFrame</code>](#AliasFrame)  
+<a name="Frame+disable"></a>
+
+### aliasFrame.disable() ⇒ [<code>Frame</code>](#Frame)
+Disables a Frame
+
+**Kind**: instance method of [<code>AliasFrame</code>](#AliasFrame)  
+**Chainable**  
+**Returns**: [<code>Frame</code>](#Frame) - The Frame that was disabled  
+<a name="Box"></a>
+
+## Box ⇐ [<code>Collection</code>](https://discord.js.org/#/docs/main/master/class/Collection)
+The common base for all Boxes
 
 **Kind**: global class  
 **Extends**: [<code>Collection</code>](https://discord.js.org/#/docs/main/master/class/Collection)  
 
-* [Cache](#Cache) ⇐ [<code>Collection</code>](https://discord.js.org/#/docs/main/master/class/Collection)
-    * [.client](#Cache+client) : [<code>SolisClient</code>](#SolisClient)
-    * [.name](#Cache+name) : <code>string</code>
-    * [.holds](#Cache+holds) : [<code>Frame</code>](#Frame)
-    * [.baseDirectories](#Cache+baseDirectories) : <code>Set.&lt;string&gt;</code>
-    * [.userDirectory](#Cache+userDirectory) : <code>string</code>
-    * [.registerBaseDirectory(directory)](#Cache+registerBaseDirectory) ⇒ [<code>Cache</code>](#Cache)
+* [Box](#Box) ⇐ [<code>Collection</code>](https://discord.js.org/#/docs/main/master/class/Collection)
+    * [.client](#Box+client) : [<code>SolisClient</code>](#SolisClient)
+    * [.name](#Box+name) : <code>string</code>
+    * [.holds](#Box+holds) : [<code>Frame</code>](#Frame)
+    * [.baseDirectories](#Box+baseDirectories) : <code>Set.&lt;string&gt;</code>
+    * [.userDirectory](#Box+userDirectory) : <code>string</code>
+    * [.registerBaseDirectory(directory)](#Box+registerBaseDirectory) ⇒ [<code>Box</code>](#Box)
+    * [.init()](#Box+init) ⇒ <code>Promise.&lt;Array.&lt;\*&gt;&gt;</code>
+    * [.load(directory, file)](#Box+load) ⇒ [<code>Frame</code>](#Frame)
+    * [.loadAll()](#Box+loadAll) ⇒ <code>number</code>
+    * [.set(frame)](#Box+set) ⇒ [<code>Frame</code>](#Frame)
+    * [.delete(name)](#Box+delete) ⇒ <code>Boolean</code>
+    * [.resolve(name)](#Box+resolve) ⇒ [<code>Frame</code>](#Frame)
 
-<a name="Cache+client"></a>
+<a name="Box+client"></a>
 
-### cache.client : [<code>SolisClient</code>](#SolisClient)
-The [SolisClient](#SolisClient) that initialized this Cache
+### box.client : [<code>SolisClient</code>](#SolisClient)
+The [SolisClient](#SolisClient) that initialized this Box
 
-**Kind**: instance property of [<code>Cache</code>](#Cache)  
+**Kind**: instance property of [<code>Box</code>](#Box)  
 **Read only**: true  
-<a name="Cache+name"></a>
+<a name="Box+name"></a>
 
-### cache.name : <code>string</code>
+### box.name : <code>string</code>
 The name of what this holds
 
-**Kind**: instance property of [<code>Cache</code>](#Cache)  
+**Kind**: instance property of [<code>Box</code>](#Box)  
 **Read only**: true  
-<a name="Cache+holds"></a>
+<a name="Box+holds"></a>
 
-### cache.holds : [<code>Frame</code>](#Frame)
+### box.holds : [<code>Frame</code>](#Frame)
 The type of structure this store holds
 
-**Kind**: instance property of [<code>Cache</code>](#Cache)  
+**Kind**: instance property of [<code>Box</code>](#Box)  
 **Read only**: true  
-<a name="Cache+baseDirectories"></a>
+<a name="Box+baseDirectories"></a>
 
-### cache.baseDirectories : <code>Set.&lt;string&gt;</code>
+### box.baseDirectories : <code>Set.&lt;string&gt;</code>
 The base directories of the Frame's this store holds
 
-**Kind**: instance property of [<code>Cache</code>](#Cache)  
+**Kind**: instance property of [<code>Box</code>](#Box)  
 **Read only**: true  
-<a name="Cache+userDirectory"></a>
+<a name="Box+userDirectory"></a>
 
-### cache.userDirectory : <code>string</code>
+### box.userDirectory : <code>string</code>
 The directory of local Frames relative to where you can run Framing from
 
-**Kind**: instance property of [<code>Cache</code>](#Cache)  
+**Kind**: instance property of [<code>Box</code>](#Box)  
 **Read only**: true  
-<a name="Cache+registerBaseDirectory"></a>
+<a name="Box+registerBaseDirectory"></a>
 
-### cache.registerBaseDirectory(directory) ⇒ [<code>Cache</code>](#Cache)
+### box.registerBaseDirectory(directory) ⇒ [<code>Box</code>](#Box)
 Registers a base directory to check for frames
 
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
+**Kind**: instance method of [<code>Box</code>](#Box)  
 **Access**: protected  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | directory | <code>string</code> | The directory to check for base frames |
+
+<a name="Box+init"></a>
+
+### box.init() ⇒ <code>Promise.&lt;Array.&lt;\*&gt;&gt;</code>
+Initializes every frame in this Box
+
+**Kind**: instance method of [<code>Box</code>](#Box)  
+<a name="Box+load"></a>
+
+### box.load(directory, file) ⇒ [<code>Frame</code>](#Frame)
+Loads a Frame so it can be used
+
+**Kind**: instance method of [<code>Box</code>](#Box)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directory | <code>string</code> | The directory of the frame |
+| file | <code>Array.&lt;string&gt;</code> | A string or array of strings where the file is located |
+
+<a name="Box+loadAll"></a>
+
+### box.loadAll() ⇒ <code>number</code>
+Loads everything, both custom Frames and built in ones
+
+**Kind**: instance method of [<code>Box</code>](#Box)  
+**Returns**: <code>number</code> - The number of frames loaded  
+<a name="Box+set"></a>
+
+### box.set(frame) ⇒ [<code>Frame</code>](#Frame)
+Sets up a Frame in the Box
+
+**Kind**: instance method of [<code>Box</code>](#Box)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| frame | [<code>Frame</code>](#Frame) | The frame to be set up |
+
+<a name="Box+delete"></a>
+
+### box.delete(name) ⇒ <code>Boolean</code>
+Deletes a frame from the store
+
+**Kind**: instance method of [<code>Box</code>](#Box)  
+**Returns**: <code>Boolean</code> - Whether or not something was deleted  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | [<code>Frame</code>](#Frame) \| <code>string</code> | A frame object or name representing a frame |
+
+<a name="Box+resolve"></a>
+
+### box.resolve(name) ⇒ [<code>Frame</code>](#Frame)
+Resolves a name into a Frame instance
+
+**Kind**: instance method of [<code>Box</code>](#Box)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | [<code>Frame</code>](#Frame) \| <code>string</code> | The Frame object or a string representing the Frame's name |
 
 <a name="Frame"></a>
 
@@ -194,25 +297,29 @@ The base class for everything in Solis
 **Kind**: global class  
 
 * [Frame](#Frame)
-    * [new Frame(client, cache, file, directory, [options])](#new_Frame_new)
+    * [new Frame(client, box, file, directory, [options])](#new_Frame_new)
     * [.client](#Frame+client) : [<code>SolisClient</code>](#SolisClient)
     * [.file](#Frame+file) : <code>Array.&lt;string&gt;</code>
     * [.name](#Frame+name) : <code>string</code>
     * [.enabled](#Frame+enabled) : <code>Boolean</code>
-    * [.cache](#Frame+cache) : [<code>Cache</code>](#Cache)
+    * [.box](#Frame+box) : [<code>Box</code>](#Box)
     * [.directory](#Frame+directory) : <code>string</code>
     * [.type](#Frame+type) : <code>string</code>
+    * [.path](#Frame+path)
+    * [.reload()](#Frame+reload) ⇒ [<code>Frame</code>](#Frame)
+    * [.unload()](#Frame+unload) ⇒ <code>void</code>
+    * [.disable()](#Frame+disable) ⇒ [<code>Frame</code>](#Frame)
 
 <a name="new_Frame_new"></a>
 
-### new Frame(client, cache, file, directory, [options])
+### new Frame(client, box, file, directory, [options])
 Initializes a new Frame
 
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | client | [<code>SolisClient</code>](#SolisClient) |  | The client that initialized this frame |
-| cache | <code>Store</code> |  | The cache this piece is for |
+| box | <code>Store</code> |  | The box this piece is for |
 | file | <code>Array.&lt;string&gt;</code> |  | The path from the Frame's folder to the extendable file |
 | directory | <code>string</code> |  | The base directory to the frames' folder |
 | [options] | [<code>FrameOptions</code>](#FrameOptions) | <code>{}</code> | The options for this frame |
@@ -241,10 +348,10 @@ The name of the Frame
 Whether this Frame is enabled
 
 **Kind**: instance property of [<code>Frame</code>](#Frame)  
-<a name="Frame+cache"></a>
+<a name="Frame+box"></a>
 
-### frame.cache : [<code>Cache</code>](#Cache)
-The Cache for this Frame
+### frame.box : [<code>Box</code>](#Box)
+The box for this Frame
 
 **Kind**: instance property of [<code>Frame</code>](#Frame)  
 <a name="Frame+directory"></a>
@@ -260,6 +367,33 @@ The type of Frame
 
 **Kind**: instance property of [<code>Frame</code>](#Frame)  
 **Read only**: true  
+<a name="Frame+path"></a>
+
+### frame.path
+The absolute path to the frame
+
+**Kind**: instance property of [<code>Frame</code>](#Frame)  
+<a name="Frame+reload"></a>
+
+### frame.reload() ⇒ [<code>Frame</code>](#Frame)
+Reloads the Frame
+
+**Kind**: instance method of [<code>Frame</code>](#Frame)  
+**Returns**: [<code>Frame</code>](#Frame) - The newly loaded Frame  
+<a name="Frame+unload"></a>
+
+### frame.unload() ⇒ <code>void</code>
+Unloads the frame
+
+**Kind**: instance method of [<code>Frame</code>](#Frame)  
+<a name="Frame+disable"></a>
+
+### frame.disable() ⇒ [<code>Frame</code>](#Frame)
+Disables a Frame
+
+**Kind**: instance method of [<code>Frame</code>](#Frame)  
+**Chainable**  
+**Returns**: [<code>Frame</code>](#Frame) - The Frame that was disabled  
 <a name="Util"></a>
 
 ## Util
