@@ -1,1 +1,3 @@
-module.exports = {}
+module.exports = {
+    Util: require('../src/stuff/util/Util')
+};
