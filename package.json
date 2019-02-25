@@ -1,5 +1,5 @@
 {
-    "name": "discord-frame",
+    "name": "discord-solis",
     "version": "0.0.1",
     "author": "Gryffon Bellish <owenbellish@gmail.com>",
     "main": "./src/index.js",
@@ -11,11 +11,11 @@
     "engines": {
         "node": ">=10.0.0"
     },
-    "repository": "github:PyroTechniac/discord-frame",
+    "repository": "github:PyroTechniac/discord-solis",
     "bugs": {
-        "url": "https://github.com/PyroTechniac/discord-frame"
+        "url": "https://github.com/PyroTechniac/discord-solis"
     },
-    "homepage": "https://github.com/PyroTechniac/discord-frame",
+    "homepage": "https://github.com/PyroTechniac/discord-solis",
     "license": "MIT",
     "dependencies": {
         "advancedjs": "^3.0.2",

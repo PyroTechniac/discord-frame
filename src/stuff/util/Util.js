@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const { CustomError } = require('advancedjs');
 
 /**
- * A Utility class for use within Frame
+ * A Utility class for use within Solis
  */
 class Util {
     constructor() {
@@ -93,7 +93,13 @@ class Util {
         return input;
     }
 
-
+    /**
+     * Sets defaults on an object that don't already have them
+     * @param {Object} def The default properties
+     * @param {Object} [obj] The object to assign the defaults to
+     * @returns {Object} Object after merging defaults
+     * @private
+     */
     static mergeDefaults(def, obj) {
         if (!obj) return Util.deepClone(def);
         for (const key in def) {
