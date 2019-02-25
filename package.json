@@ -1,0 +1,39 @@
+{
+    "name": "discord-frame",
+    "version": "0.0.1",
+    "author": "Gryffon Bellish <owenbellish@gmail.com>",
+    "main": "./src/index.js",
+    "description": "A modular framework for discord.js",
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "repository": "github:PyroTechniac/discord-frame",
+    "bugs": {
+        "url": "https://github.com/PyroTechniac/discord-frame"
+    },
+    "homepage": "https://github.com/PyroTechniac/discord-frame",
+    "license": "MIT",
+    "dependencies": {
+        "advancedjs": "^3.0.2",
+        "fs-nextra": "^0.4.3",
+        "util": "^0.11.1"
+    },
+    "devDependencies": {
+        "@types/node": "^11.9.5",
+        "eslint": "^5.14.1",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-config-standard": "^12.0.0",
+        "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-node": "^8.0.1",
+        "eslint-plugin-promise": "^4.0.1",
+        "eslint-plugin-standard": "^4.0.0",
+        "jsdoc-to-markdown": "^4.0.1",
+        "tslint": "^5.13.0",
+        "tslint-config-typings": "^0.3.1",
+        "typescript": "^3.3.3333"
+    },
+    "optionalDependencies": {},
+    "peerDependencies": {
+        "discord.js": "discordjs/discord.js"
+    }
+}
