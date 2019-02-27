@@ -1,15 +1,16 @@
 const Discord = require('discord.js');
 const { CustomError } = require('advancedjs');
 const path = require('path');
-const StoreRegistry = require('./structures/StoreRegistry');
-
+const CommandStore = require('./structures/CommandStore');
 class SolisClient extends Discord.Client {
     constructor(options = {}) {
         super(options);
 
+        this.prefix = options.prefix || '/';
+
         this.baseDirectory = path.dirname(require.main.filename);
 
-        this.stores = new StoreRegistry(this);
+        this.commands = new CommandStore(this).register();
     }
 }
 
