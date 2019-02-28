@@ -1,3 +1,6 @@
 module.exports = {
-    name: 'test'
+    name: 'test',
+    say: (message) => {
+        console.log(message);
+    }
 };

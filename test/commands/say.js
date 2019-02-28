@@ -1,9 +1,7 @@
 module.exports = {
     name: 'Say',
+    execute: () => console.log('Test'),
     test: () => {
-        console.log('Test');
-    },
-    execute: () => {
         console.log('Execute');
     }
 };

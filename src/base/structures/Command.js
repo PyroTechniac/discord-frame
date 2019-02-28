@@ -10,7 +10,8 @@ class Command {
         this.execute = info.execute || this.default;
     }
     default() {
-        throw new Error('Test');
+        // throw new Error('Test');
+        console.log('Test');
     }
 }
 
