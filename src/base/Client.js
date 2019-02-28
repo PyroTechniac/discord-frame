@@ -10,16 +10,9 @@ class SolisClient extends Discord.Client {
 
         this.baseDirectory = path.dirname(require.main.filename);
 
-        this.stores = new Set();
+        this.stores = new Discord.Collection();
 
         this.commands = new CommandStore(this);
-        this.stores.add(this.commands);
-    }
-    register() {
-        this.stores.forEach(store => {
-            store.register();
-        });
-        return this;
     }
 }
 
