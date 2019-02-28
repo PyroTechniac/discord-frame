@@ -8,6 +8,13 @@ class Command {
         this.name = info.name.toLowerCase();
 
         this.execute = info.execute || this.default;
+        Object.values(info).forEach(val => {
+            if (typeof val === 'function') {
+                if (val.name !== 'execute') {
+                    this[val.name] = val;
+                }
+            }
+        });
     }
     default() {
         // throw new Error('Test');
