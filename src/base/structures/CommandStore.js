@@ -14,9 +14,9 @@ class CommandStore extends Store {
                     const cmd = new Command(this.client, cmdInfo);
                     this.set(cmd.name, cmd);
                 });
+                return this;
             });
         });
-        return this;
     }
 }
 
