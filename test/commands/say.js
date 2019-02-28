@@ -1,6 +1,8 @@
 module.exports = {
     name: 'Say',
-    execute: () => console.log('Test'),
+    execute: function(message) {
+        console.log(this.client);
+    },
     test: () => {
         console.log('Execute');
     }

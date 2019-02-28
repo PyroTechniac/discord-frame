@@ -14,6 +14,7 @@ class CommandStore extends Store {
             const cmdInfo = require(path.join(this.client.baseDirectory, this.holds, file));
             const cmd = new Command(this.client, cmdInfo);
             this.set(cmd.name, cmd);
+            cmd.execute();
         });
         return this;
     }

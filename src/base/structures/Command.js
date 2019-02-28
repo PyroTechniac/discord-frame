@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs-nextra');
+const { CustomError } = require('advancedjs');
 
 class Command {
     constructor(client, info) {
@@ -7,7 +8,7 @@ class Command {
 
         this.name = info.name.toLowerCase();
 
-        this.execute = info.execute || this.default;
+        this.execute = info.execute.bind(this) || this.default;
         Object.values(info).forEach(val => {
             if (typeof val === 'function') {
                 if (val.name !== 'execute') {
@@ -17,8 +18,7 @@ class Command {
         });
     }
     default() {
-        // throw new Error('Test');
-        console.log('Test');
+        throw new CustomError(`The command ${this.name} does not have an execute function`, 'CommandExecuteError');
     }
 }
 

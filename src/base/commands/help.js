@@ -1,3 +1,6 @@
 module.exports = {
-    name: 'help'
+    name: 'help',
+    execute: (message) => {
+        //
+    }
 };
