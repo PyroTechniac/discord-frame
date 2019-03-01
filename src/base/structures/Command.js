@@ -20,6 +20,14 @@ class Command {
     default() {
         throw new CustomError(`The command ${this.name} does not have an execute function`, 'CommandExecuteError');
     }
+    _execute(message, ...args) {
+        try {
+            this.execute(message, ...args);
+        } catch (error) {
+            message.send(`${error.name}: ${error.message}`);
+            return this.client.emit('commandError', this, message, error);
+        }
+    }
 }
 
 module.exports = Command;
