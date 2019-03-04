@@ -20,6 +20,7 @@
     "dependencies": {
         "advancedjs": "^3.0.3",
         "discord.js": "discordjs/discord.js",
+        "eslint-config-pyro": "pyrotechniac/pyro-lint",
         "fs-nextra": "^0.4.3",
         "util": "^0.11.1"
     },
@@ -33,6 +34,7 @@
         "eslint-plugin-promise": "^4.0.1",
         "eslint-plugin-standard": "^4.0.0",
         "jsdoc-to-markdown": "^4.0.1",
+        "pyro-lint": "pyrotechniac/pyro-lint",
         "require-all": "^3.0.0",
         "tslint": "^5.13.0",
         "tslint-config-typings": "^0.3.1",
